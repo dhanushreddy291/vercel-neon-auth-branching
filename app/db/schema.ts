@@ -154,3 +154,10 @@ export const projectConfigInNeonAuth = neonAuth.table("project_config", {
 }, (table) => [
 	unique("project_config_endpoint_id_key").on(table.endpointId),
 ]);
+
+export const messages = pgTable("messages", {
+	id: uuid("id").defaultRandom().primaryKey(),
+	content: text("content").notNull(),
+	userId: uuid("user_id").references(() => userInNeonAuth.id).notNull(),
+	createdAt: timestamp("created_at").defaultNow()
+});
