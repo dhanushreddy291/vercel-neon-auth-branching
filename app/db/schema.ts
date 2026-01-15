@@ -159,5 +159,7 @@ export const messages = pgTable("messages", {
 	id: uuid("id").defaultRandom().primaryKey(),
 	content: text("content").notNull(),
 	userId: uuid("user_id").references(() => userInNeonAuth.id).notNull(),
-	createdAt: timestamp("created_at").defaultNow()
+	createdAt: timestamp("created_at").defaultNow(),
+	// default to true to allow existing messages to be shown
+	isApproved: boolean("is_approved").default(true).notNull(),
 });
